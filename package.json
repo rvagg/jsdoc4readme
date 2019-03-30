@@ -1,0 +1,33 @@
+{
+  "name": "jsdoc4readme",
+  "version": "1.0.0",
+  "description": "Generate an API section for a README.md from inline JSDocs",
+  "main": "jsdoc4readme.js",
+  "dependencies": {
+    "bl": "~3.0.0",
+    "jsdoc": "~3.5.5",
+    "requizzle": "~0.2.1",
+    "split2": "~3.1.1"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rvagg/jsdoc4readme.git"
+  },
+  "bin": {
+    "jsdoc4readme": "./jsdoc4readme.js"
+  },
+  "keywords": [
+    "jsdoc",
+    "markdown",
+    "readme",
+    "documentation",
+    "docs"
+  ],
+  "author": "Rod <rod@vagg.org> (http://r.va.gg/)",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/rvagg/jsdoc4readme/issues"
+  },
+  "homepage": "https://github.com/rvagg/jsdoc4readme#readme"
+}
