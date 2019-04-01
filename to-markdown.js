@@ -70,6 +70,12 @@ function parameter (param) {
 function entryBlock (entry) {
   let b = `<a name="${namedReference(entry.longname)}"></a>\n### \`${descriptor(entry)}\`\n\n`
 
+  if (entry.classdesc) {
+    // this comes from the description above `class Foo`, entry.description is from the constructor!
+    // so having both might be a problem and we may need to special-case `entry.kind=='class'` + `entry.description`
+    b += `${replaceLinks(entry.classdesc)}\n\n`
+  }
+
   if (entry.description) {
     b += `${replaceLinks(entry.description)}\n\n`
   }
@@ -77,6 +83,11 @@ function entryBlock (entry) {
   if (entry.params && entry.params.length) {
     b += '**Parameters:**\n\n'
     b += `${entry.params.map(parameter).join('\n')}\n\n`
+  }
+
+  if (entry.properties && entry.properties.length) {
+    b += '**Properties:**\n\n'
+    b += `${entry.properties.map(parameter).join('\n')}\n\n`
   }
 
   if (entry.returns && entry.returns[0]) {
