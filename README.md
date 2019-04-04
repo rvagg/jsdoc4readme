@@ -4,6 +4,8 @@
 
 _What? Surely there's other ways to do this already?_ Yes! But I have opinions!
 
+See https://github.com/rvagg/iamap/#api for an example of the generated Markdown from jsdoc4readme.
+
 ## Related works
 
 Some related works, along with my rationale for not choosing them for my own use. Follow the links and you may find something that works for you:
