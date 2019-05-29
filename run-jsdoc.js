@@ -19,10 +19,7 @@ module.exports = function runJsdoc (sources) {
   const handlers = require('jsdoc/lib/jsdoc/src/handlers')
   handlers.attachTo(parser)
   const augment = require('jsdoc/lib/jsdoc/augment')
-  const borrow = require('jsdoc/lib/jsdoc/borrow')
   let docs = parser.parse(sources)
-  borrow.indexAll(docs)
   augment.augmentAll(docs)
-  borrow.resolveBorrows(docs)
   return docs
 }
