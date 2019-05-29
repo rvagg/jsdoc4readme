@@ -5,7 +5,7 @@
   "main": "jsdoc4readme.js",
   "dependencies": {
     "bl": "~3.0.0",
-    "jsdoc": "~3.6.2",
+    "jsdoc": "3.6.2",
     "requizzle": "~0.2.2",
     "split2": "~3.1.1"
   },
