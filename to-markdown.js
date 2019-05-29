@@ -47,7 +47,7 @@ function describeProperty (prop, indent) {
     if (prop.optional) {
       p += ', optional'
     }
-    if (prop.defaultvalue) {
+    if (prop.defaultvalue !== undefined) {
       p += `, default=\`${prop.defaultvalue}\``
     }
     p += ')_'
