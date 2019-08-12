@@ -19,22 +19,22 @@ function descriptor (entry) {
     d += 'async '
   }
   d += entry.longname
-  if (entry.kind === 'function') {
+  if (entry.kind === 'function' || entry.kind === 'constructor') {
     d += '('
-  }
-  entry.params && entry.params.filter((p) => p.name.indexOf('.') === -1).forEach((p, i) => {
-    if (p.optional) {
-      d += '['
-    }
-    if (i) {
-      d += ', '
-    }
-    d += p.name
-    if (p.optional) {
-      d += ']'
-    }
-  })
-  if (entry.kind === 'function') {
+
+    entry.params && entry.params.filter((p) => p.name.indexOf('.') === -1).forEach((p, i) => {
+      if (p.optional) {
+        d += '['
+      }
+      if (i) {
+        d += ', '
+      }
+      d += p.name
+      if (p.optional) {
+        d += ']'
+      }
+    })
+
     d += ')'
   }
   return d
@@ -59,8 +59,8 @@ function describeProperty (prop, indent) {
 }
 
 function parameter (param) {
-  let indents = param.name.replace(/[^.]/g, '').length + 1
-  let indent = Array(indents).join('  ')
+  const indents = param.name.replace(/[^.]/g, '').length + 1
+  const indent = Array(indents).join('  ')
   // let name = param.name.replace(/^.+\.(.+)$/, '$1') // strip off any nesting prefixes
   let p = `${indent}* **\`${param.name}\`**`
   p += describeProperty(param, indent)
@@ -71,9 +71,11 @@ function entryBlock (entry) {
   let b = `<a name="${namedReference(entry.longname)}"></a>\n### \`${descriptor(entry)}\`\n\n`
 
   if (entry.classdesc) {
-    // this comes from the description above `class Foo`, entry.description is from the constructor!
-    // so having both might be a problem and we may need to special-case `entry.kind=='class'` + `entry.description`
     b += `${replaceLinks(entry.classdesc)}\n\n`
+  }
+
+  if (entry.kind === 'class' && entry.description) {
+    b += `<a name="${namedReference(entry.longname)}_new"></a>\n#### \`${descriptor(Object.assign({}, entry, { kind: 'constructor' }))}\`\n\n`
   }
 
   if (entry.description) {
@@ -99,7 +101,11 @@ function entryBlock (entry) {
 
 function toc (docs) {
   return '### Contents\n\n' + docs.map((e) => {
-    return ` * [\`${descriptor(e)}\`](#${namedReference(e.longname)})`
+    let item = ` * [\`${descriptor(e)}\`](#${namedReference(e.longname)})`
+    if (e.kind === 'class' && e.description) {
+      item += `\n   * [\`${descriptor(Object.assign({}, e, { kind: 'constructor' }))}\`](#${namedReference(e.longname)}_new)`
+    }
+    return item
   }).join('\n')
 }
 
