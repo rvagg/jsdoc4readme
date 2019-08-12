@@ -6,7 +6,10 @@
 
 _What? Surely there's other ways to do this already?_ Yes! But I have opinions!
 
-See https://github.com/rvagg/iamap/#api for an example of the generated Markdown from jsdoc4readme.
+Examples of the generated Markdown from jsdoc4readme:
+
+* https://github.com/rvagg/iamap/#api
+* https://github.com/rvagg/js-ds-zipcar#api
 
 ## Related works
 
