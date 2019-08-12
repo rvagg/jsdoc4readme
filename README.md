@@ -2,6 +2,8 @@
 
 **Generate an API section for a README.md from inline JSDocs**
 
+[![NPM](https://nodei.co/npm/jsdoc4readme.svg)](https://nodei.co/npm/jsdoc4readme/)
+
 _What? Surely there's other ways to do this already?_ Yes! But I have opinions!
 
 See https://github.com/rvagg/iamap/#api for an example of the generated Markdown from jsdoc4readme.
