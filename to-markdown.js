@@ -74,22 +74,25 @@ function entryBlock (entry) {
     b += `${replaceLinks(entry.classdesc)}\n\n`
   }
 
+  if (entry.properties && entry.properties.length) {
+    b += '**Properties:**\n\n'
+    b += `${entry.properties.map(parameter).join('\n')}\n\n`
+  }
+
   if (entry.kind === 'class' && entry.description) {
-    b += `<a name="${namedReference(entry.longname)}_new"></a>\n#### \`${descriptor(Object.assign({}, entry, { kind: 'constructor' }))}\`\n\n`
+    b += `<a name="${namedReference(entry.longname)}_new"></a>\n#### Constructor: \`${descriptor(Object.assign({}, entry, { kind: 'constructor' }))}\`\n\n`
   }
 
   if (entry.description) {
     b += `${replaceLinks(entry.description)}\n\n`
   }
 
-  if (entry.params && entry.params.length) {
+  // don't include parameters if there are no descriptions and this is a class and
+  // we have properties ... otherwise it looks like a double-up
+  const isClassWithPropertiesAndNoParameterDescriptions = entry.kind !== 'class' || !entry.properties || !entry.properties.length || (entry.params && entry.params.find((p) => p.description))
+  if (entry.params && entry.params.length && isClassWithPropertiesAndNoParameterDescriptions) {
     b += '**Parameters:**\n\n'
     b += `${entry.params.map(parameter).join('\n')}\n\n`
-  }
-
-  if (entry.properties && entry.properties.length) {
-    b += '**Properties:**\n\n'
-    b += `${entry.properties.map(parameter).join('\n')}\n\n`
   }
 
   if (entry.returns && entry.returns[0]) {
@@ -103,7 +106,7 @@ function toc (docs) {
   return '### Contents\n\n' + docs.map((e) => {
     let item = ` * [\`${descriptor(e)}\`](#${namedReference(e.longname)})`
     if (e.kind === 'class' && e.description) {
-      item += `\n   * [\`${descriptor(Object.assign({}, e, { kind: 'constructor' }))}\`](#${namedReference(e.longname)}_new)`
+      item += `\n   * [Constructor: \`${descriptor(Object.assign({}, e, { kind: 'constructor' }))}\`](#${namedReference(e.longname)}_new)`
     }
     return item
   }).join('\n')
