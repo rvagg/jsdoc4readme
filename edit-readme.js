@@ -11,7 +11,7 @@ module.exports = function editReadme (readme, markdown) {
     .pipe(split2())
     .pipe(new Transform({
       transform (chunk, encoding, callback) {
-        let str = chunk.toString()
+        const str = chunk.toString()
         if (section === 'api' && str.match(/^## /)) {
           section = 'foot'
         }

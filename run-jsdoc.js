@@ -8,7 +8,7 @@ const jsdocSrc = path.join(path.dirname(require.resolve('jsdoc/jsdoc.js')), 'lib
 module.exports = function runJsdoc (sources) {
   // sadly we require this abomination because jsdoc uses non-standard CJS module paths
   require = require('requizzle')({ // eslint-disable-line
-    requirePaths: { before: [ jsdocSrc ] },
+    requirePaths: { before: [jsdocSrc] },
     infect: true
   })
   const Config = require('jsdoc/lib/jsdoc/config')
@@ -19,7 +19,7 @@ module.exports = function runJsdoc (sources) {
   const handlers = require('jsdoc/lib/jsdoc/src/handlers')
   handlers.attachTo(parser)
   const augment = require('jsdoc/lib/jsdoc/augment')
-  let docs = parser.parse(sources)
+  const docs = parser.parse(sources)
   augment.augmentAll(docs)
   return docs
 }
