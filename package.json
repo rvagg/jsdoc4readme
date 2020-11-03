@@ -1,6 +1,6 @@
 {
   "name": "jsdoc4readme",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Generate an API section for a README.md from inline JSDocs",
   "main": "jsdoc4readme.js",
   "dependencies": {
