@@ -15,7 +15,10 @@ function replaceLinks (description) {
 }
 
 function renameType (type) {
-  return type.replace(/\.</g, '<').replace(/Array<(.+?)>/g, '$1[]')
+  return type
+    .replace(/import\(\s*(['"]).*?\1\s*\)\./g, '')
+    .replace(/\.</g, '<')
+    .replace(/\bArray<(.+?)>/g, '$1[]')
 }
 
 function isConstructor (entry) {

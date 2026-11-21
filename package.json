@@ -5,11 +5,10 @@
   "main": "jsdoc4readme.js",
   "dependencies": {
     "bl": "^4.0.3",
-    "jsdoc": "~3.6.3",
+    "jsdoc": "^4.0.2",
     "requizzle": "~0.2.3",
     "split2": "^3.2.2"
   },
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rvagg/jsdoc4readme.git"

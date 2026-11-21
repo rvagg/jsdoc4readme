@@ -11,6 +11,17 @@ module.exports = function runJsdoc (sources) {
     requirePaths: { before: [jsdocSrc] },
     infect: true
   })
+  // catharsis only understands Closure-style types; keep anything it rejects
+  // (TypeScript syntax such as `import('x').Y`, `() => T`, `A & B`) verbatim
+  const catharsis = require('catharsis')
+  const parse = catharsis.parse
+  catharsis.parse = function (expr, options) {
+    try {
+      return parse.call(this, expr, options)
+    } catch (e) {
+      return { type: catharsis.Types.NameExpression, name: expr.trim() }
+    }
+  }
   const Config = require('jsdoc/lib/jsdoc/config')
   const config = new Config().get()
   const env = require('jsdoc/lib/jsdoc/env')
