@@ -21,6 +21,18 @@ test('markdown to stdout', async () => {
   assert.strictEqual(stdout, await read('example.md'))
 })
 
+test('CRLF source', async () => {
+  const dir = await fs.mkdtemp(path.join(os.tmpdir(), 'jsdoc4readme-'))
+  try {
+    const crlf = path.join(dir, 'example.js')
+    await fs.writeFile(crlf, (await read('example.js')).replace(/\n/g, '\r\n'))
+    const { stdout } = await run(process.execPath, [cli, crlf])
+    assert.strictEqual(stdout, await read('example.md'))
+  } finally {
+    await fs.rm(dir, { recursive: true, force: true })
+  }
+})
+
 test('--description-only', async () => {
   const { stdout } = await run(process.execPath, [cli, '--description-only', source])
   assert.strictEqual(stdout, await read('example-description-only.md'))

@@ -5,8 +5,9 @@ function namedReference (name, constructor) {
     (constructor ? '_constructor' : '')
 }
 
-function replaceLinks (description) {
-  return description.replace(/{@link\s+([^\s}]+)(?:\s+([^}]+))?}/g, function (r, g, b) {
+// jsdoc leaves a bare `\r` for each line break in CRLF sources
+function formatText (description) {
+  return description.replace(/\r\n?/g, '\n').replace(/{@link\s+([^\s}]+)(?:\s+([^}]+))?}/g, function (r, g, b) {
     if (!b) {
       return `[\`${g}\`](#${namedReference(g)})`
     }
@@ -77,7 +78,7 @@ function describeProperty (prop, indent, parens = true) {
     p += `${parens ? ')' : ''}\``
   }
   if (prop.description) {
-    p += `: ${replaceLinks(prop.description).replace(/\n/g, `\n${indent}  `)}`
+    p += `: ${formatText(prop.description).replace(/\n/g, `\n${indent}  `)}`
   }
   return p
 }
@@ -95,7 +96,7 @@ function entryBlock (entry) {
   let b = `<a name="${namedReference(entry.longname, isConstructor(entry))}"></a>\n### \`${descriptor(entry)}\`\n\n`
 
   if (entry.classdesc) {
-    b += `${replaceLinks(entry.classdesc)}\n\n`
+    b += `${formatText(entry.classdesc)}\n\n`
   }
 
   if (entry.properties && entry.properties.filter(Boolean).length) {
@@ -119,7 +120,7 @@ function entryBlock (entry) {
   }
 
   if (entry.description) {
-    b += `${replaceLinks(entry.description)}\n\n`
+    b += `${formatText(entry.description)}\n\n`
   }
 
   return b
