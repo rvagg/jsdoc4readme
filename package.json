@@ -1,6 +1,6 @@
 {
   "name": "jsdoc4readme",
-  "version": "1.4.0",
+  "version": "2.0.0",
   "description": "Generate an API section for a README.md from inline JSDocs",
   "type": "module",
   "main": "jsdoc4readme.js",
@@ -57,14 +57,38 @@
         {
           "preset": "conventionalcommits",
           "releaseRules": [
-            { "breaking": true, "release": "major" },
-            { "revert": true, "release": "patch" },
-            { "type": "feat", "release": "minor" },
-            { "type": "fix", "release": "patch" },
-            { "type": "chore", "release": "patch" },
-            { "type": "docs", "release": "patch" },
-            { "type": "test", "release": "patch" },
-            { "scope": "no-release", "release": false }
+            {
+              "breaking": true,
+              "release": "major"
+            },
+            {
+              "revert": true,
+              "release": "patch"
+            },
+            {
+              "type": "feat",
+              "release": "minor"
+            },
+            {
+              "type": "fix",
+              "release": "patch"
+            },
+            {
+              "type": "chore",
+              "release": "patch"
+            },
+            {
+              "type": "docs",
+              "release": "patch"
+            },
+            {
+              "type": "test",
+              "release": "patch"
+            },
+            {
+              "scope": "no-release",
+              "release": false
+            }
           ]
         }
       ],
@@ -74,11 +98,26 @@
           "preset": "conventionalcommits",
           "presetConfig": {
             "types": [
-              { "type": "feat", "section": "Features" },
-              { "type": "fix", "section": "Bug Fixes" },
-              { "type": "chore", "section": "Trivial Changes" },
-              { "type": "docs", "section": "Trivial Changes" },
-              { "type": "test", "section": "Tests" }
+              {
+                "type": "feat",
+                "section": "Features"
+              },
+              {
+                "type": "fix",
+                "section": "Bug Fixes"
+              },
+              {
+                "type": "chore",
+                "section": "Trivial Changes"
+              },
+              {
+                "type": "docs",
+                "section": "Trivial Changes"
+              },
+              {
+                "type": "test",
+                "section": "Tests"
+              }
             ]
           }
         }
