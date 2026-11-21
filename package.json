@@ -1,6 +1,6 @@
 {
   "name": "jsdoc4readme",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Generate an API section for a README.md from inline JSDocs",
   "type": "module",
   "main": "jsdoc4readme.js",
