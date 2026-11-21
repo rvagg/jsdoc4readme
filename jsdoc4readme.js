@@ -2,10 +2,10 @@
 
 // Copyright Rod Vagg; Licensed under the Apache License, Version 2.0, see README.md for more information
 
-const fs = require('fs')
-const runJsdoc = require('./run-jsdoc')
-const toMarkdown = require('./to-markdown')
-const editReadme = require('./edit-readme')
+import fs from 'node:fs'
+import runJsdoc from './run-jsdoc.cjs'
+import toMarkdown from './to-markdown.js'
+import editReadme from './edit-readme.js'
 
 const sources = process.argv.slice(2).filter((a) => !a.startsWith('--'))
 const readme = process.argv.includes('--readme') &&
@@ -18,10 +18,13 @@ if (!sources.length) {
 }
 
 const docs = runJsdoc(sources).filter((d) => {
-  return !d.undocumented && d.ignore !== true && (!descOnly || d.description !== undefined)
+  return !d.undocumented &&
+    d.ignore !== true &&
+    d.access !== 'private' &&
+    (!descOnly || d.description !== undefined)
 })
 
-// Uncommont these lines if you want to see the usable output
+// Uncomment these lines to see the raw jsdoc output
 // docs.forEach((d) => delete d.meta)
 // console.log(JSON.stringify(docs, null, 2))
 

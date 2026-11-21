@@ -1,6 +1,6 @@
 // Copyright Rod Vagg; Licensed under the Apache License, Version 2.0, see README.md for more information
 
-const path = require('path')
+const path = require('node:path')
 const jsdocSrc = path.join(path.dirname(require.resolve('jsdoc/jsdoc.js')), 'lib')
 
 // run jsdoc, it's ... complicated

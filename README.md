@@ -2,7 +2,7 @@
 
 **Generate an API section for a README.md from inline JSDocs**
 
-[![NPM](https://nodei.co/npm/jsdoc4readme.svg)](https://nodei.co/npm/jsdoc4readme/)
+[![NPM](https://nodei.co/npm/jsdoc4readme.svg?style=flat&data=n,v&color=blue)](https://nodei.co/npm/jsdoc4readme/)
 
 _What? Surely there's other ways to do this already?_ Yes! But I have opinions!
 
@@ -31,10 +31,14 @@ npm install jsdoc4readme
 ## Usage
 
 ```sh
-jsdoc4readme [--readme] <sourcefile>[, <sourcefile>, ...]
+jsdoc4readme [--readme] [--description-only] <sourcefile>[, <sourcefile>, ...]
 ```
 
 The `--readme` argument will look for a README.md (or README.markdown, or a case insensitive variant) and replace the block between an `## API` line and the next `##` heading. If you don't supply `--readme`, the Markdown will be printed to standard out and you can do what you like with it.
+
+The `--description-only` argument skips entries that have no description, such as bare `@typedef`s and constructors documented only by their `@param`s.
+
+TypeScript-flavoured type expressions in JSDoc (`import('./x.js').Y`, `() => T`, `{ a?: b }`, `A & B`) are passed through verbatim, with `import('...').` prefixes stripped.
 
 Add a script to package.json for use as `npm run docs` (after installing with `npm install jsdoc4readme -D`):
 

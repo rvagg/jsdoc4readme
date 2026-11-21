@@ -6,7 +6,7 @@ function namedReference (name, constructor) {
 }
 
 function replaceLinks (description) {
-  return description.replace(/{@link ([^ }]+)([^}]+)?}/g, function (r, g, b) {
+  return description.replace(/{@link\s+([^\s}]+)(?:\s+([^}]+))?}/g, function (r, g, b) {
     if (!b) {
       return `[\`${g}\`](#${namedReference(g)})`
     }
@@ -72,7 +72,7 @@ function describeProperty (prop, indent, parens = true) {
       p += ', optional'
     }
     if (prop.defaultvalue !== undefined) {
-      p += `, default=\`${prop.defaultvalue}\``
+      p += `, default=${prop.defaultvalue}`
     }
     p += `${parens ? ')' : ''}\``
   }
@@ -115,7 +115,7 @@ function entryBlock (entry) {
   }
 
   if (entry.returns && entry.returns[0]) {
-    b += `* Returns: ${describeProperty(entry.returns[0], '', false)}\n\n`
+    b += `* Returns:${describeProperty(entry.returns[0], '', false).replace(/^:/, '')}\n\n`
   }
 
   if (entry.description) {
@@ -135,6 +135,6 @@ function toc (docs) {
   }).join('\n')
 }
 
-module.exports = function toMarkdown (docs) {
+export default function toMarkdown (docs) {
   return `${toc(docs)}\n\n${docs.map(entryBlock).join('')}`
 }
