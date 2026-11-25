@@ -1,3 +1,9 @@
+## [2.0.2](https://github.com/rvagg/jsdoc4readme/compare/v2.0.1...v2.0.2) (2026-11-25)
+
+### Trivial Changes
+
+* **deps-dev:** bump semantic-release from 25.0.9 to 26.0.1 ([#6](https://github.com/rvagg/jsdoc4readme/issues/6)) ([8398100](https://github.com/rvagg/jsdoc4readme/commit/83981004af9d5eaa033841bf017258f1a5ffd7d8))
+
 ## [2.0.1](https://github.com/rvagg/jsdoc4readme/compare/v2.0.0...v2.0.1) (2026-11-21)
 
 ### Trivial Changes
