@@ -21,7 +21,7 @@
   "devDependencies": {
     "@semantic-release/changelog": "^7.0.0",
     "@semantic-release/git": "^11.0.1",
-    "conventional-changelog-conventionalcommits": "^9.3.1",
+    "conventional-changelog-conventionalcommits": "^10.3.0",
     "semantic-release": "^26.0.1",
     "standard": "^17.1.2"
   },
